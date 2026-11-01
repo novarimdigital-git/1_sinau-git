@@ -1,1 +1,3 @@
 hi, catatan pertama ku
+
+Hari ini saya belajar cara memperbaiki identitas commit di Git!
