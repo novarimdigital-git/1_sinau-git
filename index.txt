@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Belajar Git dari Nol sampai Mahir</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        git: { orange: '#F05032', dark: '#24292E' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Header / Banner -->
+    <header class="bg-gradient-to-r from-slate-900 via-git-dark to-slate-900 text-white py-12 px-6 shadow-lg">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="bg-git-orange/20 text-git-orange border border-git-orange/30 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Cheat Sheet & Panduan Pribadi</span>
+            <h1 class="text-3xl md:text-5xl font-bold mt-4 mb-2">Belajar Git dari Nol sampai Mahir</h1>
+            <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">Dokumentasi lengkap hasil praktik alur kerja Git, GitHub, Branching, hingga penggunaan IDE modern.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-10 space-y-12">
+
+        <!-- Search Bar untuk Interaktivitas JS -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex items-center gap-3">
+            <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input type="text" id="searchInput" placeholder="Cari perintah atau materi (misal: commit, branch, pull)..." class="w-full bg-transparent focus:outline-none text-sm text-slate-700">
+        </div>
+
+        <!-- Bagian 1: Konsep Dasar -->
+        <section class="material-card bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-orange-100 text-git-orange flex items-center justify-center font-bold text-sm">1</span>
+                Konsep Inti & Tiga Status Git
+            </h2>
+            <p class="text-slate-600 text-sm mb-6">Git bekerja menggunakan sistem <em>snapshot</em> (foto kondisi project) bukan perubahan baris, serta membagi file ke dalam tiga status utama:</p>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">1. Modified</span>
+                    <p class="text-xs text-slate-600 mt-1">File di komputer sudah diubah/diedit, tetapi belum disimpan ke database Git lokal.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">2. Staged</span>
+                    <p class="text-xs text-slate-600 mt-1">File yang sudah dimodifikasi ditandai dan disiapkan untuk masuk ke checkpoint berikutnya (<code class="bg-slate-200 px-1 rounded">git add</code>).</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">3. Committed</span>
+                    <p class="text-xs text-slate-600 mt-1">Data/snapshot tersimpan permanen sebagai checkpoint di database lokal (<code class="bg-slate-200 px-1 rounded">git commit</code>).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian 2: Persiapan & Setup Awal -->
+        <section class="material-card bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-orange-100 text-git-orange flex items-center justify-center font-bold text-sm">2</span>
+                Setup Awal & Identitas
+            </h2>
+            <div class="space-y-4">
+                <div class="command-box bg-slate-900 text-slate-100 rounded-xl p-4 font-mono text-xs md:text-sm overflow-x-auto relative group">
+                    <button onclick="copyCode(this)" class="absolute top-3 right-3 bg-slate-700 hover:bg-slate-600 text-slate-200 px-2.5 py-1 rounded text-xs transition">Salin</button>
+                    <p class="text-slate-400"># Atur identitas agar commit atas nama Anda sendiri</p>
+                    <p>git config --global user.name "novarim"</p>
+                    <p>git config --global user.email "emailanda@example.com"</p>
+                    <p class="text-slate-400 mt-3"># Mulai repository baru di folder project</p>
+                    <p>git init</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian 3: Siklus Kerja Harian -->
+        <section class="material-card bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-orange-100 text-git-orange flex items-center justify-center font-bold text-sm">3</span>
+                Siklus Kerja Harian (Daily Workflow)
+            </h2>
+            <p class="text-slate-600 text-sm mb-4">Urutan perintah yang wajib dikuasai setiap kali Anda selesai menulis atau mengubah kode:</p>
+            
+            <div class="command-box bg-slate-900 text-slate-100 rounded-xl p-4 font-mono text-xs md:text-sm overflow-x-auto relative group">
+                <button onclick="copyCode(this)" class="absolute top-3 right-3 bg-slate-700 hover:bg-slate-600 text-slate-200 px-2.5 py-1 rounded text-xs transition">Salin</button>
+                <p class="text-slate-400"># 1. Cek file yang berubah</p>
+                <p>git status</p>
+                <p class="text-slate-400 mt-2"># 2. Masukkan file ke staging area</p>
+                <p>git add nama_file.txt</p>
+                <p class="text-slate-400 mt-2"># 3. Buat checkpoint / simpan permanen di lokal</p>
+                <p>git commit -m "Pesan keterangan perubahan"</p>
+                <p class="text-slate-400 mt-2"># 4. Unggah checkpoint ke GitHub (Cloud)</p>
+                <p>git push</p>
+            </div>
+        </section>
+
+        <!-- Bagian 4: Manajemen Branch & Kolaborasi -->
+        <section class="material-card bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-orange-100 text-git-orange flex items-center justify-center font-bold text-sm">4</span>
+                Manajemen Branch & Sinkronisasi Tim
+            </h2>
+            
+            <div class="space-y-4 text-sm text-slate-600">
+                <div class="border-l-4 border-git-orange pl-4 py-1">
+                    <strong class="text-slate-900">Membuat & Berpindah Branch Eksperimen:</strong>
+                    <p class="font-mono text-xs bg-slate-100 p-2 rounded mt-1 text-slate-800">git checkout -b fitur-baru</p>
+                </div>
+                <div class="border-l-4 border-git-orange pl-4 py-1">
+                    <strong class="text-slate-900">Menggabungkan Branch ke Jalur Utama (Merge):</strong>
+                    <p class="font-mono text-xs bg-slate-100 p-2 rounded mt-1 text-slate-800">git checkout main<br>git merge fitur-baru<br>git push origin main</p>
+                </div>
+                <div class="border-l-4 border-git-orange pl-4 py-1">
+                    <strong class="text-slate-900">Menghapus Branch yang Gagal/Batal:</strong>
+                    <p class="font-mono text-xs bg-slate-100 p-2 rounded mt-1 text-slate-800">git branch -D fitur-baru <span class="text-slate-400"># Lokal</span><br>git push origin --delete fitur-baru <span class="text-slate-400"># Cloud</span></p>
+                </div>
+                <div class="border-l-4 border-git-orange pl-4 py-1">
+                    <strong class="text-slate-900">Mengambil Pembaruan dari Tim (Pull):</strong>
+                    <p class="font-mono text-xs bg-slate-100 p-2 rounded mt-1 text-slate-800">git pull</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-xs text-slate-400 border-t border-slate-200 mt-12">
+        <p>Dokumentasi Belajar Git • Dibuat khusus untuk referensi latihan harian.</p>
+    </footer>
+
+    <!-- JavaScript Interaktif Sederhana -->
+    <script>
+        // Fitur Tombol Salin Kode
+        function copyCode(button) {
+            const box = button.closest('.command-box');
+            let textToCopy = '';
+            box.querySelectorAll('p').forEach(p => {
+                if (!p.classList.contains('text-slate-400')) {
+                    textToCopy += p.innerText + '\n';
+                }
+            });
+            navigator.clipboard.writeText(textToCopy.trim());
+            button.innerText = 'Disalin!';
+            setTimeout(() => { button.innerText = 'Salin'; }, 2000);
+        }
+
+        // Fitur Filter / Search Materi
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.material-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
