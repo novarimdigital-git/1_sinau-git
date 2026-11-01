@@ -1,3 +1,5 @@
 hi, catatan pertama ku
 
 Hari ini saya belajar cara memperbaiki identitas commit di Git!
+
+Kemudian belajar buat cabang, dihapus dan buat lagi! ini yg ke#2
