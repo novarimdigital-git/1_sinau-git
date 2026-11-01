@@ -11,6 +11,7 @@ Kemudian belajar buat cabang, dihapus dan buat lagi! ini yg ke#2
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Sunday NIght 1 NOv 2026 22.55 WIB -->
     <title>Dokumentasi Belajar Git dari Nol sampai Mahir</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,7 +34,7 @@ Kemudian belajar buat cabang, dihapus dan buat lagi! ini yg ke#2
         <div class="max-w-4xl mx-auto text-center">
             <span class="bg-git-orange/20 text-git-orange border border-git-orange/30 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Cheat Sheet & Panduan Pribadi</span>
             <h1 class="text-3xl md:text-5xl font-bold mt-4 mb-2">Belajar Git dari Nol sampai Mahir</h1>
-            <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">Dokumentasi lengkap hasil praktik alur kerja Git, GitHub, Branching, hingga penggunaan IDE modern.</p>
+            <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">Dokumentasi lengkap hasil praktik alur kerja Git, GitHub, Branching, hingga pengelolaan banyak file.</p>
         </div>
     </header>
 
@@ -43,7 +44,7 @@ Kemudian belajar buat cabang, dihapus dan buat lagi! ini yg ke#2
         <!-- Search Bar untuk Interaktivitas JS -->
         <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex items-center gap-3">
             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            <input type="text" id="searchInput" placeholder="Cari perintah atau materi (misal: commit, branch, pull)..." class="w-full bg-transparent focus:outline-none text-sm text-slate-700">
+            <input type="text" id="searchInput" placeholder="Cari perintah atau materi (misal: commit, branch, add .)..." class="w-full bg-transparent focus:outline-none text-sm text-slate-700">
         </div>
 
         <!-- Bagian 1: Konsep Dasar -->
@@ -88,20 +89,24 @@ Kemudian belajar buat cabang, dihapus dan buat lagi! ini yg ke#2
             </div>
         </section>
 
-        <!-- Bagian 3: Siklus Kerja Harian -->
+        <!-- Bagian 3: Siklus Kerja Harian & Pengelolaan Banyak File -->
         <section class="material-card bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
             <h2 class="text-xl font-bold text-slate-900 flex items-center gap-3 mb-4">
                 <span class="w-8 h-8 rounded-lg bg-orange-100 text-git-orange flex items-center justify-center font-bold text-sm">3</span>
-                Siklus Kerja Harian (Daily Workflow)
+                Siklus Kerja Harian & Pengelolaan Banyak File
             </h2>
-            <p class="text-slate-600 text-sm mb-4">Urutan perintah yang wajib dikuasai setiap kali Anda selesai menulis atau mengubah kode:</p>
+            <p class="text-slate-600 text-sm mb-4">Urutan perintah harian serta cara menangani banyak file/folder sekaligus:</p>
             
-            <div class="command-box bg-slate-900 text-slate-100 rounded-xl p-4 font-mono text-xs md:text-sm overflow-x-auto relative group">
+            <div class="command-box bg-slate-900 text-slate-100 rounded-xl p-4 font-mono text-xs md:text-sm overflow-x-auto relative group mb-6">
                 <button onclick="copyCode(this)" class="absolute top-3 right-3 bg-slate-700 hover:bg-slate-600 text-slate-200 px-2.5 py-1 rounded text-xs transition">Salin</button>
                 <p class="text-slate-400"># 1. Cek file yang berubah</p>
                 <p>git status</p>
-                <p class="text-slate-400 mt-2"># 2. Masukkan file ke staging area</p>
-                <p>git add nama_file.txt</p>
+                <p class="text-slate-400 mt-2"># 2. Masukkan SEMUA file & folder sekaligus ke staging area</p>
+                <p>git add .</p>
+                <p class="text-slate-400 mt-2"># (Opsional) Pilih file spesifik / jenis file tertentu:</p>
+                <p class="text-slate-500">git add index.html style.css  # Beberapa file khusus</p>
+                <p class="text-slate-500">git add *.html              # Berdasarkan ekstensi file</p>
+                <p class="text-slate-500">git add gambar/              # Semua files dalam folder gambar</p>
                 <p class="text-slate-400 mt-2"># 3. Buat checkpoint / simpan permanen di lokal</p>
                 <p>git commit -m "Pesan keterangan perubahan"</p>
                 <p class="text-slate-400 mt-2"># 4. Unggah checkpoint ke GitHub (Cloud)</p>
@@ -150,7 +155,8 @@ Kemudian belajar buat cabang, dihapus dan buat lagi! ini yg ke#2
             const box = button.closest('.command-box');
             let textToCopy = '';
             box.querySelectorAll('p').forEach(p => {
-                if (!p.classList.contains('text-slate-400')) {
+                // Hanya salin baris perintah aktif (abaikan teks komentar redup)
+                if (!p.classList.contains('text-slate-400') && !p.classList.contains('text-slate-500')) {
                     textToCopy += p.innerText + '\n';
                 }
             });
